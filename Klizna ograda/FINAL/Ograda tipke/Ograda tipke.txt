@@ -1,0 +1,50 @@
+const int IN1 = 3;
+const int IN2 = 5;
+const int ENA = 6;
+const int prekidaczatvori= 8;
+const int prekidacotvori = 7;
+int zatvori = 0;
+int otvori =0;
+
+
+
+
+
+void setup() {
+  // put your setup code here, to run once:
+ pinMode(IN1,OUTPUT);
+ pinMode(IN2,OUTPUT);
+ pinMode(ENA,OUTPUT);
+ pinMode (prekidacotvori,INPUT);
+ pinMode (prekidaczatvori,INPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+zatvori = digitalRead (prekidaczatvori);
+ otvori = digitalRead (prekidacotvori);
+ 
+ if (otvori == HIGH ){ //ako je pritisnuta tipka za otvaranje otvara vrata
+    digitalWrite(IN1, HIGH);      //CCW rotation
+    digitalWrite(IN2, LOW);
+    analogWrite(ENA,80);
+    zatvori = 0;
+    delay(3000);
+    digitalWrite (IN2, LOW);
+    digitalWrite(IN1, LOW);
+     }
+
+
+  if (zatvori == HIGH){ //ako je pritisnuta tipka za zatvaranje zatvara vrata
+    digitalWrite(IN1, LOW);        //CW rotation
+    digitalWrite (IN2, HIGH); 
+    analogWrite(ENA,80);   
+    otvori = 0;
+    delay(3000);
+    digitalWrite (IN1, LOW);
+    digitalWrite (IN2, LOW);
+     }
+    otvori = 0;
+    zatvori = 0;
+
+ }
